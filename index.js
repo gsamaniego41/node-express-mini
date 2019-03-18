@@ -27,4 +27,12 @@ server.delete("/api/users/:id", (req, res) => {
     .catch(err => res.status(500).json({message}));
 });
 
+server.put("/api/users/:id", (req, res) => {
+  const updates = req.body;
+  const {id} = req.params;
+  db.update(id, updates)
+    .then(count => res.status(201).json(count))
+    .catch(err => status(500).json({message}));
+});
+
 server.listen(PORT, console.log(`Port ${PORT} is listening`));
